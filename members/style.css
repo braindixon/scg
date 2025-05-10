@@ -32,6 +32,9 @@ body {
   min-height: 480px;
 }
 
+h4 {
+    font-size: 2em;
+}
 .song-download-block.visible {
   opacity: 1;
   transform: translateY(0);
