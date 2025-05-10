@@ -1,0 +1,223 @@
+<div class="downloads-page">
+
+  <div class="song-download-block fade-in">
+    <h4>Moment By Moment</h4>
+    <div class="download-buttons">
+      <a href="link-to-audio-moment.mp3" class="download-button" download>
+        <span class="button-text">Audio</span>
+        <span class="format-label">MP3</span>
+      </a>
+      <a href="link-to-lyrics-moment.pdf" class="download-button" download>
+        <span class="button-text">Lyrics</span>
+        <span class="format-label">PDF</span>
+      </a>
+      <a href="link-to-chords-moment.pdf" class="download-button" download>
+        <span class="button-text">Chord Chart</span>
+        <span class="format-label">PDF</span>
+      </a>
+      <a href="link-to-melody-moment.pdf" class="download-button" download>
+        <span class="button-text">Lead Sheet</span>
+        <span class="format-label">PDF</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="song-download-block fade-in">
+    <h4>In Vain My Roving Thoughts</h4>
+    <div class="download-buttons">
+      <a href="link-to-audio-roving.mp3" class="download-button" download>
+        <span class="button-text">Audio</span>
+        <span class="format-label">MP3</span>
+      </a>
+      <a href="link-to-lyrics-roving.pdf" class="download-button" download>
+        <span class="button-text">Lyrics</span>
+        <span class="format-label">PDF</span>
+      </a>
+      <a href="link-to-chords-roving.pdf" class="download-button" download>
+        <span class="button-text">Chord Chart</span>
+        <span class="format-label">PDF</span>
+      </a>
+      <a href="link-to-melody-roving.pdf" class="download-button" download>
+        <span class="button-text">Lead Sheet</span>
+        <span class="format-label">PDF</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="song-download-block fade-in">
+    <h4>In the Secret of His Presence</h4>
+    <div class="download-buttons">
+      <a href="link-to-audio-secret.mp3" class="download-button" download>
+        <span class="button-text">Audio</span>
+        <span class="format-label">MP3</span>
+      </a>
+      <a href="link-to-lyrics-secret.pdf" class="download-button" download>
+        <span class="button-text">Lyrics</span>
+        <span class="format-label">PDF</span>
+      </a>
+      <a href="link-to-chords-secret.pdf" class="download-button" download>
+        <span class="button-text">Chord Chart</span>
+        <span class="format-label">PDF</span>
+      </a>
+      <a href="link-to-melody-secret.pdf" class="download-button" download>
+        <span class="button-text">Lead Sheet</span>
+        <span class="format-label">PDF</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<style>
+/* ===============================
+   Layout: Responsive Card Grid
+   =============================== */
+.downloads-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
+}
+
+/* ===============================
+   Card Styling
+   =============================== */
+.song-download-block {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fafafa;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 480px;
+}
+
+.song-download-block.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===============================
+   Buttons Layout: Vertical Stack
+   =============================== */
+.download-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ===============================
+   Button Styling
+   =============================== */
+.download-button {
+  background-color: #333;
+  color: #fff;
+  padding: 12px 20px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex-shrink: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Hover and Tap Effects */
+.download-button:hover {
+  background-color: #555;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.download-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Button Text */
+.button-text {
+  flex-grow: 1;
+  text-align: left;
+}
+
+/* Format Label (MP3, PDF) */
+.format-label {
+  opacity: 0.8;
+  font-size: 0.75em;
+  margin-left: 10px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  text-align: right;
+}
+
+/* ===============================
+   Animation Keyframes
+   =============================== */
+@keyframes buttonFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===============================
+   Animation Triggers
+   =============================== */
+.download-button.visible {
+  animation: buttonFadeIn 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.download-button.visible .format-label {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.3s;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const songBlocks = document.querySelectorAll('.song-download-block');
+
+  const appearOptions = {
+    threshold: 0.3,
+  };
+
+  const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        const buttons = entry.target.querySelectorAll('.download-button');
+        buttons.forEach((button, index) => {
+          setTimeout(() => {
+            button.classList.add('visible');
+          }, index * 150);
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, appearOptions);
+
+  songBlocks.forEach(block => {
+    appearOnScroll.observe(block);
+  });
+});
+</script>
