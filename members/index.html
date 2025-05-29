@@ -10,7 +10,10 @@
 
 <div class="downloads-page">
   <div class="song-download-block">
-    <h4>Moment by Moment</h4>
+    <div class="song-meta">
+      <h4>Moment by Moment <span>Solo</span></h4>
+      <time>29 May 2025</time>
+    </div>
     <div class="download-buttons">
       <a class="download-button" href="#">MP3</a>
       <a class="download-button" href="#">Guitar Chords</a>
@@ -22,42 +25,12 @@
   </div>
 </div>
 
-
-<div class="downloads-page">
-  <div class="song-download-block">
-    <h4>Moment by Moment</h4>
-    <div class="download-buttons">
-     <a class="download-button" href="#">MP3</a>
-      <a class="download-button" href="#">Guitar Chords</a>
-      <a class="download-button" href="#">Lead Sheet</a>
-      <a class="download-button" href="#">Piano Music</a>
-      <a class="download-button" href="#">PowerPoint</a>
-      <a class="download-button" href="#">Overhead</a>
-    </div>
-  </div>
-</div>
-
-
-  <div class="downloads-page">
-  <div class="song-download-block">
-    <h4>Moment by Moment</h4>
-    <div class="download-buttons">
-      <a class="download-button" href="#">MP3</a>
-      <a class="download-button" href="#">Guitar Chords</a>
-      <a class="download-button" href="#">Lead Sheet</a>
-      <a class="download-button" href="#">Piano Music</a>
-      <a class="download-button" href="#">PowerPoint</a>
-      <a class="download-button" href="#">Overhead</a>
-    </div>
-  </div>
-</div>
     
 <script>
   function sendHeight() {
     const height = document.body.scrollHeight;
     parent.postMessage({ iframeHeight: height }, '*');
   }
-
   window.addEventListener('load', sendHeight);
   window.addEventListener('resize', sendHeight);
 </script>
