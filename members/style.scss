@@ -3,26 +3,25 @@ body {
 }
 
 .downloads-page {
-  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 40px 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 40px;
 }
 
 .song-download-block {
-  border: 1px solid #ddd;
-  padding: 20px;
-  border-radius: 8px;
-  background-color: #fafafa;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  min-height: 400px;
+  padding: 20px;
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
 
   h4 {
-    font-size: 1.5em;
+    font-size: 1.25em;
     margin: 0;
   }
 
@@ -36,7 +35,7 @@ body {
     padding: 20px 30px;
 
     h4 {
-      font-size: 1.25em;
+      font-size: 1em;
       margin: 0;
       flex: 0 0 auto;
       white-space: nowrap;
@@ -45,21 +44,28 @@ body {
 }
 
 .download-buttons {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 10px;
 
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: row; // <– key change: horizontal layout
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
   .download-button {
+    width: 100%;
+    text-align: center;
     background-color: #333;
     color: #fff;
     padding: 12px 20px;
     text-decoration: none;
     border-radius: 6px;
-    font-size: 0.85em;
+    font-size: 0.75em;
     font-weight: 600;
-    text-align: center;
-    flex-shrink: 0;
-    min-width: 100px;
     box-sizing: border-box;
     transition: background-color 0.3s ease, transform 0.2s ease;
 
@@ -67,23 +73,15 @@ body {
       background-color: #555;
       transform: translateY(-2px);
     }
-  }
 
-  @media (min-width: 768px) {
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    gap: 10px;
-
-    .download-button {
-      flex: 1 1 auto;
-      max-width: unset;
-      flex: 0 0 auto;
+    @media (min-width: 768px) {
+      width: auto;
+      min-width: 140px;
+      flex: 0 1 auto;
     }
   }
 }
 
-  
 .song-meta {
   display: flex;
   flex-direction: column;
@@ -95,25 +93,23 @@ body {
     align-items: baseline;
     margin: 0;
 
-      span {
-        background-color: #000;
-        color: #fff;
-        padding: 2px 8px;
-        border-radius: 9999px; // pill shape
-        font-size: 0.7em;
-        font-weight: 600;
-        line-height: 1;
-        margin-left: 10px;
-        display: inline-block;
+    span {
+      background-color: #000;
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      font-size: 0.6em;
+      font-weight: 600;
+      line-height: 1;
+      margin-left: 10px;
+      display: inline-block;
     }
-
   }
 
   time {
-    font-size: 0.9em;
+    font-size: 0.6em;
     color: #666;
     margin: 0;
     text-transform: uppercase;
   }
 }
-
