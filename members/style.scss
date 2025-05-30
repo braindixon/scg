@@ -95,19 +95,25 @@ body {
     align-items: baseline;
     margin: 0;
 
-    span {
-      font-size: 0.85em;
-      font-weight: normal;
-      color: #555;
-      margin-left: 10px;
-      white-space: nowrap;
+      span {
+        background-color: #000;
+        color: #fff;
+        padding: 2px 8px;
+        border-radius: 9999px; // pill shape
+        font-size: 0.7em;
+        font-weight: 600;
+        line-height: 1;
+        margin-left: 10px;
+        display: inline-block;
     }
+
   }
 
   time {
     font-size: 0.9em;
     color: #666;
     margin: 0;
+    text-transform: uppercase;
   }
 }
 

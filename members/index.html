@@ -1,38 +1,65 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Downloads</title>
-    <link rel="stylesheet" href="https://braindixon.github.io/scg/members/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://braindixon.github.io/scg/members/scripts.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
   </head>
+  <body>
+    <div id="downloads-container" class="downloads-page"></div>
 
-<div class="downloads-page">
-  <div class="song-download-block">
-    <div class="song-meta">
-      <h4>Moment by Moment <span>Solo</span></h4>
-      <time>29 May 2025</time>
-    </div>
-    <div class="download-buttons">
-      <a class="download-button" href="#">MP3</a>
-      <a class="download-button" href="#">Guitar Chords</a>
-      <a class="download-button" href="#">Lead Sheet</a>
-      <a class="download-button" href="#">Piano Music</a>
-      <a class="download-button" href="#">PowerPoint</a>
-      <a class="download-button" href="#">Overhead</a>
-    </div>
-  </div>
-</div>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
-    
-<script>
-  function sendHeight() {
-    const height = document.body.scrollHeight;
-    parent.postMessage({ iframeHeight: height }, '*');
-  }
-  window.addEventListener('load', sendHeight);
-  window.addEventListener('resize', sendHeight);
+
+    <!-- Main script wrapped in DOMContentLoaded -->
+    <script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_Tm39GbNhrTlZOS71uuFHkqBxoqMQ6xecwGOFBQsT0r7FFAXrpQFmwUZiG--kv-a0ut1iJIyPgffG/pub?output=csv';
+
+    Papa.parse(csvUrl, {
+      download: true,
+      header: true,
+      complete: function(results) {
+        const data = results.data;
+        console.log("Parsed CSV data:", data);
+        generateDownloads(data);
+      }
+    });
+
+    function generateDownloads(data) {
+      const container = document.getElementById('downloads-container');
+      data.forEach(song => {
+        const block = `
+          <div class="song-download-block">
+            <div class="song-meta">
+              <h4>${song.Title} <span>${song.Arrangement}</span></h4>
+              <time>${song.Date}</time>
+            </div>
+            <div class="download-buttons">
+              ${song.MP3 ? `<a class="download-button" href="${song.MP3}">MP3</a>` : ''}
+              ${song.GuitarChords ? `<a class="download-button" href="${song.GuitarChords}">Guitar Chords</a>` : ''}
+              ${song.LeadSheet ? `<a class="download-button" href="${song.LeadSheet}">Lead Sheet</a>` : ''}
+              ${song.PianoMusic ? `<a class="download-button" href="${song.PianoMusic}">Piano Music</a>` : ''}
+              ${song.PowerPoint ? `<a class="download-button" href="${song.PowerPoint}">PowerPoint</a>` : ''}
+              ${song.Overhead ? `<a class="download-button" href="${song.Overhead}">Overhead</a>` : ''}
+            </div>
+          </div>`;
+        container.innerHTML += block;
+      });
+
+      sendHeight(); // for iframe resizing
+    }
+
+    function sendHeight() {
+      const height = document.body.scrollHeight;
+      parent.postMessage({ iframeHeight: height }, '*');
+    }
+
+    window.addEventListener('resize', sendHeight);
+  });
 </script>
 
+  </body>
 </html>

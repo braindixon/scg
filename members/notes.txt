@@ -1,0 +1,102 @@
+Absolutely! Here's a **clean, step-by-step summary** for **Option 1**: dynamically generating your song download blocks from a **Google Sheet**, using **Tabletop.js**, and embedding it into **Squarespace**.
+
+---
+
+## ✅ Goal
+
+Create a Google Sheet with song info → generate song blocks dynamically → embed on your Squarespace site.
+
+---
+
+## 🧩 Step-by-Step Setup
+
+### **1. Create Your Google Sheet**
+
+Create a sheet with column headers like this:
+
+| Title            | Date        | Arrangement | MP3   | GuitarChords | LeadSheet | PianoMusic | PowerPoint | Overhead |
+| ---------------- | ----------- | ----------- | ----- | ------------ | --------- | ---------- | ---------- | -------- |
+| Moment by Moment | 29 May 2025 | Solo        | #link | #link        | #link     | #link      | #link      | #link    |
+
+> ⚠️ Each column should have **no spaces** in its header (or use camelCase).
+
+---
+
+### **2. Publish the Sheet to the Web**
+
+* Go to your Google Sheet.
+* Click **File > Share > Publish to Web**
+* Choose the **entire sheet**, then click **Publish**.
+* Copy the **Sheet ID** from the URL:
+
+  ```
+  https://docs.google.com/spreadsheets/d/THIS_IS_YOUR_SHEET_ID/edit
+  ```
+
+---
+
+### **3. Add HTML + Script to Your Page**
+
+Paste this into a **Code Block** in Squarespace or a linked HTML file in your repo:
+
+```html
+<div id="downloads-container" class="downloads-page"></div>
+
+<script src="https://unpkg.com/tabletop@1.6.0/tabletop.js"></script>
+<script>
+  function generateDownloads(data) {
+    const container = document.getElementById('downloads-container');
+    data.forEach(song => {
+      const block = `
+        <div class="song-download-block">
+          <div class="song-meta">
+            <h4>${song.Title} <span>${song.Arrangement}</span></h4>
+            <time>${song.Date}</time>
+          </div>
+          <div class="download-buttons">
+            ${song.MP3 ? `<a class="download-button" href="${song.MP3}">MP3</a>` : ''}
+            ${song.GuitarChords ? `<a class="download-button" href="${song.GuitarChords}">Guitar Chords</a>` : ''}
+            ${song.LeadSheet ? `<a class="download-button" href="${song.LeadSheet}">Lead Sheet</a>` : ''}
+            ${song.PianoMusic ? `<a class="download-button" href="${song.PianoMusic}">Piano Music</a>` : ''}
+            ${song.PowerPoint ? `<a class="download-button" href="${song.PowerPoint}">PowerPoint</a>` : ''}
+            ${song.Overhead ? `<a class="download-button" href="${song.Overhead}">Overhead</a>` : ''}
+          </div>
+        </div>`;
+      container.innerHTML += block;
+    });
+  }
+
+  Tabletop.init({
+    key: 'YOUR_GOOGLE_SHEET_ID',
+    simpleSheet: true,
+    callback: generateDownloads
+  });
+</script>
+```
+
+> 🔁 Replace `YOUR_GOOGLE_SHEET_ID` with the real Sheet ID.
+
+---
+
+### **4. Style It Using Your SCSS**
+
+Use the SCSS we wrote earlier for:
+
+* `.downloads-page`
+* `.song-download-block`
+* `.song-meta h4 span` (pill styling)
+* `.download-buttons` and `.download-button`
+
+---
+
+## ✅ That's It!
+
+You're now:
+
+* Managing your song data from a **Google Sheet**.
+* Displaying it dynamically on your site with **zero manual HTML editing**.
+* Fully in control of layout with your own CSS/SCSS.
+
+---
+
+Would you like a working sample Google Sheet or help styling the fallback for missing data (e.g., no MP3)?
