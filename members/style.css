@@ -13,12 +13,13 @@ body {
 
 .song-download-block {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 20px;
-  background: #fafafa;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1rem 2rem;
+  background: #f9f9f9;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
 }
 .song-download-block h4 {
   font-size: 1.25em;
@@ -84,7 +85,9 @@ body {
 .song-meta {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.25rem;
 }
 .song-meta h4 {
   display: flex;

@@ -13,12 +13,13 @@ body {
 
 .song-download-block {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 20px;
-  background: #fafafa;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1rem 2rem;
+  background: #f9f9f9;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
 
   h4 {
     font-size: 1.25em;
@@ -85,24 +86,26 @@ body {
 .song-meta {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.25rem;
 
   h4 {
     display: flex;
-  align-items: center;
-  gap: 0.5rem;
+    align-items: center;
+    gap: 0.5rem;
 
     span {
       background-color: #000;
-  color: #fff;
-  font-size: 0.75rem;
-  padding: 0.15rem 0.5rem;
-  border-radius: 1rem;
-  text-transform: uppercase;
-  font-weight: 700;
-  line-height: 1;
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 1rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    line-height: 1;
+      }
     }
-  }
 
   time {
     font-size: 0.6em;
