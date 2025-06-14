@@ -88,6 +88,8 @@ body {
   align-items: flex-start;
   justify-content: center;
   gap: 0.25rem;
+  flex: 1;
+  min-width: 200px;
 }
 .song-meta h4 {
   display: flex;

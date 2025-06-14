@@ -89,6 +89,8 @@ body {
   align-items: flex-start;
   justify-content: center;
   gap: 0.25rem;
+  flex: 1;
+  min-width: 200px;
 
   h4 {
     display: flex;
