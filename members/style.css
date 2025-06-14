@@ -27,6 +27,7 @@ body {
   .song-download-block {
     flex-wrap: nowrap;
     gap: 2rem;
+    align-items: center;
   }
 }
 
@@ -36,6 +37,12 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
+}
+@media (min-width: 768px) {
+  .song-meta {
+    justify-content: center;
+  }
 }
 .song-meta h4 {
   display: flex;
@@ -66,6 +73,7 @@ body {
   justify-content: flex-end;
   gap: 10px;
   flex: 1 1 auto;
+  align-items: center;
 }
 .download-buttons .download-button {
   background-color: #333;
