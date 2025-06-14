@@ -20,79 +20,80 @@
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
     <script>
-      window.addEventListener('DOMContentLoaded', () => {
-        const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_Tm39GbNhrTlZOS71uuFHkqBxoqMQ6xecwGOFBQsT0r7FFAXrpQFmwUZiG--kv-a0ut1iJIyPgffG/pub?output=csv';
+  window.addEventListener('DOMContentLoaded', () => {
+    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_Tm39GbNhrTlZOS71uuFHkqBxoqMQ6xecwGOFBQsT0r7FFAXrpQFmwUZiG--kv-a0ut1iJIyPgffG/pub?output=csv';
 
-        Papa.parse(csvUrl, {
-          download: true,
-          header: true,
-          complete: function(results) {
-            const data = results.data;
-            generateDownloads(data);
-          }
-        });
+    Papa.parse(csvUrl, {
+      download: true,
+      header: true,
+      complete: function(results) {
+        const data = results.data;
+        generateDownloads(data);
+      }
+    });
 
-        function generateDownloads(data) {
-          const container = document.getElementById('downloads-container');
-          container.innerHTML = '';
+    function generateDownloads(data) {
+      const container = document.getElementById('downloads-container');
+      container.innerHTML = '';
 
-          data.forEach(song => {
-            const type = (song.Arrangement || '').toLowerCase().trim();
+      data.forEach(song => {
+        const type = (song.Arrangement || '').toLowerCase().trim();
 
-            const block = `
-              <div class="song-download-block" data-type="${type}">
-                <div class="song-meta">
-                  <h4>${song.Title} <span>${song.Arrangement}</span></h4>
-                  <time>${song.Date}</time>
-                </div>
-                <div class="download-buttons">
-                  ${song.MP3 ? `<a class="download-button" href="${song.MP3}">MP3</a>` : ''}
-                  ${song.GuitarChords ? `<a class="download-button" href="${song.GuitarChords}">Guitar Chords</a>` : ''}
-                  ${song.LeadSheet ? `<a class="download-button" href="${song.LeadSheet}">Lead Sheet</a>` : ''}
-                  ${song.PianoMusic ? `<a class="download-button" href="${song.PianoMusic}">Piano Music</a>` : ''}
-                  ${song.PowerPoint ? `<a class="download-button" href="${song.PowerPoint}">PowerPoint</a>` : ''}
-                  ${song.Overhead ? `<a class="download-button" href="${song.Overhead}">Overhead</a>` : ''}
-                </div>
-              </div>`;
-            container.innerHTML += block;
-          });
-
-          initFilters();
-          sendHeight(); // iframe resizing
-        }
-
-        function initFilters() {
-          const buttons = document.querySelectorAll('.filter-button');
-          const blocks = document.querySelectorAll('.song-download-block');
-
-          buttons.forEach(button => {
-            button.addEventListener('click', () => {
-              buttons.forEach(btn => btn.classList.remove('active'));
-              button.classList.add('active');
-
-              const filter = button.getAttribute('data-filter');
-
-              blocks.forEach(block => {
-                const type = block.getAttribute('data-type');
-                if (filter === 'all' || type === filter) {
-                  block.style.display = 'block';
-                } else {
-                  block.style.display = 'none';
-                }
-              });
-
-              sendHeight();
-            });
-          });
-        }
-
-        function sendHeight() {
-          const height = document.body.scrollHeight;
-          parent.postMessage({ iframeHeight: height }, '*');
-        }
-
-        window.addEventListener('resize', sendHeight);
+        const block = `
+          <div class="song-download-block" data-type="${type}">
+            <div class="song-meta">
+              <h4>${song.Title} <span>${song.Arrangement}</span></h4>
+              <time>${song.Date}</time>
+            </div>
+            <div class="download-buttons">
+              ${song.MP3 ? `<a class="download-button" href="${song.MP3}">MP3</a>` : ''}
+              ${song.GuitarChords ? `<a class="download-button" href="${song.GuitarChords}">Guitar Chords</a>` : ''}
+              ${song.LeadSheet ? `<a class="download-button" href="${song.LeadSheet}">Lead Sheet</a>` : ''}
+              ${song.PianoMusic ? `<a class="download-button" href="${song.PianoMusic}">Piano Music</a>` : ''}
+              ${song.PowerPoint ? `<a class="download-button" href="${song.PowerPoint}">PowerPoint</a>` : ''}
+              ${song.Overhead ? `<a class="download-button" href="${song.Overhead}">Overhead</a>` : ''}
+            </div>
+          </div>`;
+        container.innerHTML += block;
       });
-    </script>
+
+      initFilters();
+      sendHeight(); // for iframe resizing
+    }
+
+    function initFilters() {
+      const buttons = document.querySelectorAll('.filter-button');
+      const blocks = document.querySelectorAll('.song-download-block');
+
+      buttons.forEach(button => {
+        button.addEventListener('click', () => {
+          buttons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+
+          const filter = button.getAttribute('data-filter');
+
+          blocks.forEach(block => {
+            const type = block.getAttribute('data-type');
+            if (filter === 'all' || type === filter) {
+              block.style.removeProperty('display'); // ✅ preserve flex layout
+            } else {
+              block.style.display = 'none';
+            }
+          });
+
+          sendHeight();
+        });
+      });
+    }
+
+    function sendHeight() {
+      const height = document.body.scrollHeight;
+      parent.postMessage({ iframeHeight: height }, '*');
+    }
+
+    window.addEventListener('resize', sendHeight);
+  });
+</script>
+
   </body>
 </html>
