@@ -100,4 +100,28 @@ body {
 .download-buttons .download-button:hover {
   background-color: #555;
   transform: translateY(-2px);
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 2rem 0;
+}
+.filters .filter-button {
+  background-color: #eee;
+  color: #333;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.filters .filter-button:hover {
+  background-color: #ccc;
+}
+.filters .filter-button.active {
+  background-color: #333;
+  color: #fff;
 }/*# sourceMappingURL=style.css.map */
